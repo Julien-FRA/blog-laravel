@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
+use App\Http\Controllers\ArticleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
-    return view('test');
-});
+Route::get('/', [MainController::class, 'home'])->name('home');
+
+Route::get('/articles', [ArticleController::class, 'getArticles'])->name('articles');
+Route::get('/articles/{slug}', [ArticleController::class, 'showArticle'])->name('article');
+Auth::routes();
