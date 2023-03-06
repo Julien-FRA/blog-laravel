@@ -25,3 +25,5 @@ Route::get('/articles/{slug}', [ArticleController::class, 'showArticle'])->name(
 Auth::routes();
 
 Route::get('admin/articles', [ArticleAdminController::class, 'index'])->middleware('admin')->name('article.index');
+Route::get('admin/articles/create', [ArticleAdminController::class, 'create'])->middleware('admin')->name('article.create');
+Route::post('admin/articles/store', [ArticleAdminController::class, 'store'])->middleware('admin')->name('article.store');
