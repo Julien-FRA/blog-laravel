@@ -15,16 +15,21 @@
       </ul>
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
           @if (Auth::user())
-          <li class="nav-item">
-            <form action="{{ route('logout') }}" method="post">
-              @csrf
-              <button type="submit" class="btn">Se déconnecter</button>
-            </form>
-          </li>  
-        @else
-          <li class="nav-item">
-            <a class="nav-link active" href="{{ route('login') }}">Me connecter</a>
-          </li>        
+            @if(Auth::user()->role === 'ADMIN')
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ route('article.index') }}">Espace admin</a>
+            </li>      
+            @endif
+            <li class="nav-item">
+              <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="btn">Se déconnecter</button>
+              </form>
+            </li>  
+          @else
+            <li class="nav-item">
+              <a class="nav-link active" href="{{ route('login') }}">Me connecter</a>
+            </li>        
         @endif
       </ul>
     </div>

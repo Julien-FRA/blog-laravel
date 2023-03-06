@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleAdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
@@ -20,4 +21,7 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 
 Route::get('/articles', [ArticleController::class, 'getArticles'])->name('articles');
 Route::get('/articles/{slug}', [ArticleController::class, 'showArticle'])->name('article');
+
 Auth::routes();
+
+Route::get('admin/articles', [ArticleAdminController::class, 'index'])->middleware('admin')->name('article.index');
