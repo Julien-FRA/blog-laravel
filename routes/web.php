@@ -20,10 +20,11 @@ use App\Http\Controllers\ArticleController;
 Route::get('/', [MainController::class, 'home'])->name('home');
 
 Route::get('/articles', [ArticleController::class, 'getArticles'])->name('articles');
-Route::get('/articles/{slug}', [ArticleController::class, 'showArticle'])->name('article');
+Route::get('/articles/{article:slug}', [ArticleController::class, 'showArticle'])->name('article');
 
 Auth::routes();
 
 Route::get('admin/articles', [ArticleAdminController::class, 'index'])->middleware('admin')->name('article.index');
 Route::get('admin/articles/create', [ArticleAdminController::class, 'create'])->middleware('admin')->name('article.create');
 Route::post('admin/articles/store', [ArticleAdminController::class, 'store'])->middleware('admin')->name('article.store');
+Route::delete('admin/articles/{article}/delete', [ArticleAdminController:: class, 'delete'])->middleware('admin')->name('article.delete');

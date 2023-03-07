@@ -44,7 +44,7 @@ class ArticleAdminController extends Controller
             'subtitle' => $request->input('subtitle'),
             'content' => $request->input('content'),
         ]);
-        return redirect()->route('article.index');
+        return redirect()->route('article.index')->with('success', 'Votre article a bien été enregistré.');
     }
 
     /**
@@ -87,8 +87,9 @@ class ArticleAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Article $article)
     {
-        //
+        $article->delete();
+        return redirect()->route('article.index')->with('success', 'Article supprimé !');
     }
 }

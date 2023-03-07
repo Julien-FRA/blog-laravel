@@ -13,9 +13,8 @@ class ArticleController extends Controller
         return view('articles', ['listeArticles' => $articles]);
     }
 
-    public function showArticle($slug)
+    public function showArticle(Article $article)
     {
-        $article = Article::where('slug', $slug)->firstOrFail();
         return view('article', ['article' => $article]);
     }
 }

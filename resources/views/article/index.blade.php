@@ -3,6 +3,12 @@
 @section('content')
 <div class="row">
   <div class="col-8 m-auto">
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success alert-block">
+          <button type="button" class="close" data-dismiss="alert">X</button>
+          {{ $message }}
+        </div>
+    @endif
     <h1 class="text-center my-3">Articles</h1>
     <div class="d-flex justify-content-center">
       <a href="{{ route('article.create') }}" class="btn btn-info my-2"><i class="fas fa-plus"></i> Ajouter un nouvel article</a>
@@ -24,7 +30,11 @@
         <td>{{$article->dateFormatted()}}</td>
         <td>
           <a href="#" class="btn btn-warning mx-1 p-1">Editer</a>
-          <a href="#" class="btn btn-danger mx-1 p-1">Supprimer</a>
+          <form action={{ route('article.delete', $article->id) }} method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-danger mx-1 p-1">Supprimer</button>
+          </form>
         </td>
       </tr>
     @endforeach
